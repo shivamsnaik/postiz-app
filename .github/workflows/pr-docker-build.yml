@@ -24,18 +24,7 @@ jobs:
 
       - name: Generate Git Tag
         id: vars
-        run: |
-          VERSION_PREFIX="v"
-          VERSION_MAJOR_MINOR="1.0"
-          VERSION_PATCH=$(git tag --list "${VERSION_PREFIX}${VERSION_MAJOR_MINOR}.*" --sort=-version:refname | head -n 1 | grep -oE '[0-9]+$')
-          if [ -z "$VERSION_PATCH" ]; then
-            VERSION_PATCH=0
-          else
-            VERSION_PATCH=$((VERSION_PATCH + 1))
-          fi
-          NEW_TAG="${VERSION_PREFIX}${VERSION_MAJOR_MINOR}.${VERSION_PATCH}"
-          echo "Generated new tag: $NEW_TAG"
-          run: echo "IMAGE_TAG=ghcr.io/shivamsnaik/postiz-app-pr:$NEW_TAG" >> $GITHUB_ENV
+        run: echo "IMAGE_TAG=ghcr.io/shivamsnaik/postiz-app-pr:${{ github.run_id }}-${{ github.run_attempt }}" >> $GITHUB_ENV
 
       - name: Build Docker image from Dockerfile.dev
         run: docker build -f Dockerfile.dev -t $IMAGE_TAG .
