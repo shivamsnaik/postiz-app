@@ -3,6 +3,7 @@ name: Build and Publish PR Docker Image
 on:
   pull_request_target:
     types: [opened, synchronize]
+  workflow_dispatch:
 
 permissions: write-all
 
