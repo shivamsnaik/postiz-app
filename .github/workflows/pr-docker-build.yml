@@ -1,8 +1,6 @@
 name: Build and Publish PR Docker Image
 
 on:
-  pull_request_target:
-    types: [opened, synchronize]
   workflow_dispatch:
 
 permissions: write-all
@@ -24,7 +22,7 @@ jobs:
 
       - name: Generate Git Tag
         id: vars
-        run: echo "IMAGE_TAG=ghcr.io/shivamsnaik/postiz-app-pr:${{ github.run_id }}-${{ github.run_attempt }}" >> $GITHUB_ENV
+        run: echo "IMAGE_TAG=ghcr.io/shivamsnaik/postiz-app-pr:latest" >> $GITHUB_ENV
 
       - name: Build Docker image from Dockerfile.dev
         run: docker build -f Dockerfile.dev -t $IMAGE_TAG .
