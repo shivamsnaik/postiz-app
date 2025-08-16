@@ -22,7 +22,7 @@ jobs:
 
       - name: Generate Git Tag
         id: vars
-        run: echo "IMAGE_TAG=ghcr.io/shivamsnaik/postiz-app-pr:latest" >> $GITHUB_ENV
+        run: echo "IMAGE_TAG=ghcr.io/shivamsnaik/postiz-app:latest" >> $GITHUB_ENV
 
       - name: Build Docker image from Dockerfile.dev
         run: docker build -f Dockerfile.dev -t $IMAGE_TAG .
